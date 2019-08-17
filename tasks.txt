@@ -1,0 +1,9 @@
+-Create users
+    -username
+    -password
+    -user since
+    -win/loss record
+-User authentication
+-Gameplay functionality
+-Matching users for games
+-List of a user's games (ongoing and completed)
