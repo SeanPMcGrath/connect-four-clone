@@ -16,7 +16,7 @@ function initializeArray(x, y) {
   return builtArray;
 }
 
-function gameTurn(currentBoard, player, playColumn) {
+function gameTurn(currentBoard, boardWidth, boardHeight, player, playColumn) {
   playColumn--;
   const nextSpace = currentBoard[playColumn].indexOf(0);
   console.log(nextSpace);
@@ -46,12 +46,14 @@ function winCheck(gameBoard, boardWidth, boardHeight, player, column, row) {
   boardWidth--;
   boardHeight--;
   for (let i = -1; i <= 1; i++) {
-    for (let j = -1; i <= 1; j++) {
+    for (let j = -1; j <= 1; j++) {
       if (
         !(i === 0 && j === 0) &&
-        validBoardPoint(boardWidth, boardHeight, column, row)
+        validBoardPoint(boardWidth, boardHeight, column + i, row + j)
       ) {
-        if (gameBoard[i][j] === player) {
+        console.log("i = " + i);
+        console.log("j = " + j);
+        if (gameBoard[column + i][row + j] === player) {
           //Check next location in that direction
           const xChange = i - column;
           const yChange = j - row;
@@ -65,7 +67,7 @@ function winCheck(gameBoard, boardWidth, boardHeight, player, column, row) {
               xChange,
               yChange,
               player,
-              sequenceCount
+              2
             )
           ) {
             return true;
@@ -80,12 +82,7 @@ function winCheck(gameBoard, boardWidth, boardHeight, player, column, row) {
 
 function validBoardPoint(boardWidth, boardHeight, column, row) {
   //All inputs 0-indexed
-  if (
-    column + i >= 0 &&
-    column + 1 < boardWidth &&
-    row + 1 >= 0 &&
-    row + 1 < boardHeight
-  ) {
+  if (column >= 0 && column < boardWidth && row >= 0 && row < boardHeight) {
     return true;
   } else {
     return false;
@@ -103,7 +100,7 @@ function sequenceCheck(
   player,
   sequenceCount
 ) {
-  if (!validateBoardPoint(boardWidth, boardHeight, column, row)) {
+  if (!validBoardPoint(boardWidth, boardHeight, column, row)) {
     return false;
   } else if (gameBoard[column][row] === player) {
     sequenceCount++;
@@ -128,17 +125,19 @@ function sequenceCheck(
   }
 }
 
-// let board = initializeArray(10, 3);
-// console.log(board);
-// board = gameTurn(board, 1, 3);
-// console.log(board);
-// board = gameTurn(board, 2, 7);
-// console.log(board);
-// board = gameTurn(board, 1, 7);
-// console.log(board);
+let width = 10;
+let height = 8;
+let board = initializeArray(width, height);
+console.log(board);
+board = gameTurn(board, width, height, 1, 3);
+console.log(board);
+board = gameTurn(board, width, height, 2, 7);
+console.log(board);
+board = gameTurn(board, width, height, 2, 7);
+console.log(board);
 
-// board = gameTurn(board, 2, 7);
-// console.log(board);
+board = gameTurn(board, width, height, 2, 7);
+console.log(board);
 
-// board = gameTurn(board, 1, 7);
-// console.log(board);
+board = gameTurn(board, width, height, 2, 7);
+console.log(board);
