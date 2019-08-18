@@ -19,7 +19,6 @@ function initializeArray(x, y) {
 function gameTurn(currentBoard, boardWidth, boardHeight, player, playColumn) {
   playColumn--;
   const nextSpace = currentBoard[playColumn].indexOf(0);
-  console.log(nextSpace);
   if (nextSpace === -1) {
     return "Invalid move. Column is full";
   } else {
@@ -51,21 +50,19 @@ function winCheck(gameBoard, boardWidth, boardHeight, player, column, row) {
         !(i === 0 && j === 0) &&
         validBoardPoint(boardWidth, boardHeight, column + i, row + j)
       ) {
-        console.log("i = " + i);
-        console.log("j = " + j);
+        // console.log("i = " + i);
+        // console.log("j = " + j);
         if (gameBoard[column + i][row + j] === player) {
           //Check next location in that direction
-          const xChange = i - column;
-          const yChange = j - row;
           if (
             sequenceCheck(
               gameBoard,
               boardWidth,
               boardHeight,
-              column + xChange,
-              row + yChange,
-              xChange,
-              yChange,
+              column + 2 * i,
+              row + 2 * j,
+              i,
+              j,
               player,
               2
             )
@@ -100,14 +97,21 @@ function sequenceCheck(
   player,
   sequenceCount
 ) {
+  console.log("sequenceCount = " + sequenceCount);
+  console.log(
+    "validBoardPoint inputs = " + [boardWidth, boardHeight, column, row]
+  );
   if (!validBoardPoint(boardWidth, boardHeight, column, row)) {
+    console.log("sequenceCheck invalid point");
     return false;
   } else if (gameBoard[column][row] === player) {
     sequenceCount++;
+    console.log("sequenceCount in sequenceCheck = " + sequenceCount);
     if (sequenceCount === 4) {
       return true;
     } else {
       //Check next spot in sequence
+      console.log("Running sequence check again...");
       return sequenceCheck(
         gameBoard,
         boardWidth,
@@ -121,6 +125,7 @@ function sequenceCheck(
       );
     }
   } else {
+    console.log("sequenceCheck fallback false");
     return false;
   }
 }
@@ -140,4 +145,4 @@ board = gameTurn(board, width, height, 2, 7);
 console.log(board);
 
 board = gameTurn(board, width, height, 2, 7);
-console.log(board);
+console.log(board + " 4th piece");
