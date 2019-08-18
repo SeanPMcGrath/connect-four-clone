@@ -138,11 +138,21 @@ board = gameTurn(board, width, height, 1, 3);
 console.log(board);
 board = gameTurn(board, width, height, 2, 7);
 console.log(board);
-board = gameTurn(board, width, height, 2, 7);
+board = gameTurn(board, width, height, 2, 8);
 console.log(board);
-
-board = gameTurn(board, width, height, 2, 7);
+board = gameTurn(board, width, height, 2, 8);
 console.log(board);
-
-board = gameTurn(board, width, height, 2, 7);
+board = gameTurn(board, width, height, 1, 9);
+console.log(board);
+board = gameTurn(board, width, height, 1, 9);
+console.log(board);
+board = gameTurn(board, width, height, 2, 9);
+console.log(board);
+board = gameTurn(board, width, height, 1, 10);
+console.log(board);
+board = gameTurn(board, width, height, 2, 10);
+console.log(board);
+board = gameTurn(board, width, height, 2, 10);
+console.log(board);
+board = gameTurn(board, width, height, 2, 10);
 console.log(board + " 4th piece");
